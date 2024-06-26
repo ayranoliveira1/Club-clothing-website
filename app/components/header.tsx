@@ -3,7 +3,7 @@ import { BsCart3 } from "react-icons/bs";
 const Header = () => {
   return (
     <header className="w-full bg-primary">
-      <div className="flex items-center justify-between px-[32px] py-10">
+      <div className="flex items-center justify-between px-[32px] py-5">
         <h2 className="text-2xl font-bold">CLUB CLOTHING</h2>
         <div className="flex items-center gap-10 text-sm font-semibold">
           <span>Explorar</span>
