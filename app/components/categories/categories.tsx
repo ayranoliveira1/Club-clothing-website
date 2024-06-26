@@ -7,6 +7,7 @@ import { getDocs, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 import "./categories.css";
+import CategoryItem from "../category-item";
 
 const Categories = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -35,7 +36,11 @@ const Categories = () => {
 
   return (
     <div className="categories-container">
-      <div className="categories-content"></div>
+      <div className="categories-content">
+        {categories.map((category) => (
+          <CategoryItem key={category.id} category={category} />
+        ))}
+      </div>
     </div>
   );
 };
