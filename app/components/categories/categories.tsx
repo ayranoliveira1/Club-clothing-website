@@ -7,7 +7,6 @@ import { getDocs, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 import CategoryItem from "../category-item";
-import { styled } from "styled-components";
 import { CategoriesContainer, CategoriesContent } from "./style";
 
 const Categories = () => {
