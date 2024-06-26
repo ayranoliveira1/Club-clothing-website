@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCNV_vKMa68XWm7xB8msOX3Ldp1jlX__YM",
+  apiKey: process.env.API_KEY,
   authDomain: "club-clothing-3ddbc.firebaseapp.com",
   projectId: "club-clothing-3ddbc",
   storageBucket: "club-clothing-3ddbc.appspot.com",
