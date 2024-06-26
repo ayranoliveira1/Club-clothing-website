@@ -6,6 +6,8 @@ import Category from "@/app/types/category";
 import { getDocs, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
+import "./categories.css";
+
 const Categories = () => {
   const [categories, setCategories] = useState<Category[]>([]);
 
