@@ -1,3 +1,9 @@
+import Header from "./components/header";
+
 export default function Home() {
-  return <main className="mt-1 flex text-red-500">teste</main>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }
