@@ -38,7 +38,9 @@ const Categories = () => {
     <div className="categories-container">
       <div className="categories-content">
         {categories.map((category) => (
-          <CategoryItem key={category.id} category={category} />
+          <div key={category.id}>
+            <CategoryItem category={category} />
+          </div>
         ))}
       </div>
     </div>
