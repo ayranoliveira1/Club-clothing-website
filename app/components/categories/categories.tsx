@@ -6,8 +6,9 @@ import Category from "@/app/types/category";
 import { getDocs, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-import "./categories.css";
 import CategoryItem from "../category-item";
+import { styled } from "styled-components";
+import { CategoriesContainer, CategoriesContent } from "./style";
 
 const Categories = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -35,15 +36,15 @@ const Categories = () => {
   }, []);
 
   return (
-    <div className="categories-container">
-      <div className="categories-content">
+    <CategoriesContainer>
+      <CategoriesContent>
         {categories.map((category) => (
           <div key={category.id}>
             <CategoryItem category={category} />
           </div>
         ))}
-      </div>
-    </div>
+      </CategoriesContent>
+    </CategoriesContainer>
   );
 };
 
