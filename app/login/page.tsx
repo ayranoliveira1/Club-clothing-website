@@ -7,6 +7,8 @@ import CustomInput from "../components/customInput/custom-input";
 
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import InputErrorMessage from "../components/input-error-message";
+import validator from "validator";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -46,9 +48,26 @@ const LoginPage = () => {
             <CustomInput
               className="text-base"
               placeholder="Digite seu e-mail"
-              {...register("email", { required: true })}
-              hasError={!!errors?.email}
+              {...register("email", {
+                required: true,
+                validate: (value) => {
+                  return validator.isEmail(value);
+                },
+              })}
+              has_error={!!errors?.email || false}
             />
+
+            {errors?.email?.type === "required" && (
+              <InputErrorMessage>E-mail é obrigatório</InputErrorMessage>
+            )}
+
+            {errors?.email?.type === "notFound" && (
+              <InputErrorMessage>O e-mail não foi encontrado</InputErrorMessage>
+            )}
+
+            {errors?.email?.type === "validate" && (
+              <InputErrorMessage>E-mail inválido</InputErrorMessage>
+            )}
           </div>
 
           <div className="flex w-full flex-col gap-1">
@@ -56,9 +75,19 @@ const LoginPage = () => {
             <CustomInput
               className="text-base"
               placeholder="Digite seu e-mail"
-              {...register("password", { required: true })}
-              hasError={!!errors?.password}
+              {...register("password", {
+                required: true,
+              })}
+              has_error={!!errors?.password || false}
             />
+
+            {errors?.password?.type === "required" && (
+              <InputErrorMessage>Senha é obrigatório</InputErrorMessage>
+            )}
+
+            {errors?.password?.type === "misMatch" && (
+              <InputErrorMessage>A senha incorreta</InputErrorMessage>
+            )}
           </div>
 
           <CustomButton
