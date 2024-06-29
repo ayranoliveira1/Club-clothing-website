@@ -11,7 +11,15 @@ import { useForm } from "react-hook-form";
 const LoginPage = () => {
   const router = useRouter();
 
-  const { register } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleLoginClick = (data: any) => {
+    console.log(data);
+  };
 
   const handleRegisterClick = () => {
     router.push("/register");
@@ -38,6 +46,8 @@ const LoginPage = () => {
             <CustomInput
               className="text-base"
               placeholder="Digite seu e-mail"
+              {...register("email", { required: true })}
+              hasError={!!errors?.email}
             />
           </div>
 
@@ -46,10 +56,17 @@ const LoginPage = () => {
             <CustomInput
               className="text-base"
               placeholder="Digite seu e-mail"
+              {...register("password", { required: true })}
+              hasError={!!errors?.password}
             />
           </div>
 
-          <CustomButton startIcon={<FiLogIn size={18} />}>Entrar</CustomButton>
+          <CustomButton
+            onClick={() => handleSubmit(handleLoginClick)()}
+            startIcon={<FiLogIn size={18} />}
+          >
+            Entrar
+          </CustomButton>
 
           <p className="text-sm text-black">
             Não tem uma conta?{" "}
