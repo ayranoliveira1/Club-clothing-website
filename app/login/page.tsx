@@ -1,6 +1,6 @@
 "use client";
 
-import { FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import CustomButton from "../components/custom-button";
 import { FiLogIn } from "react-icons/fi";
 import CustomInput from "../components/customInput/custom-input";
@@ -9,10 +9,12 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import InputErrorMessage from "../components/input-error-message";
 import validator from "validator";
+import { useState } from "react";
 
 const LoginPage = () => {
-  const router = useRouter();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -23,7 +25,11 @@ const LoginPage = () => {
     console.log(data);
   };
 
-  const handleRegisterClick = () => {
+  const handleShowPasswordClick = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleOpenRegisterClick = () => {
     router.push("/register");
   };
 
@@ -72,22 +78,34 @@ const LoginPage = () => {
 
           <div className="flex w-full flex-col gap-1">
             <label className="font-semibold text-[#343A40]">Senha</label>
-            <CustomInput
-              className="text-base"
-              placeholder="Digite seu e-mail"
-              {...register("password", {
-                required: true,
-              })}
-              has_error={!!errors?.password || false}
-            />
 
-            {errors?.password?.type === "required" && (
-              <InputErrorMessage>Senha é obrigatório</InputErrorMessage>
-            )}
+            <div className="relative">
+              <CustomInput
+                className="text-base"
+                type={showPassword ? "text" : "password"}
+                placeholder="Digite sua senha"
+                {...register("password", {
+                  required: true,
+                  minLength: 8,
+                })}
+                has_error={!!errors?.password || false}
+              />
 
-            {errors?.password?.type === "misMatch" && (
-              <InputErrorMessage>A senha incorreta</InputErrorMessage>
-            )}
+              {errors?.password?.type === "required" && (
+                <InputErrorMessage>Senha é obrigatório</InputErrorMessage>
+              )}
+
+              {errors?.password?.type === "misMatch" && (
+                <InputErrorMessage>A senha incorreta</InputErrorMessage>
+              )}
+
+              <button
+                onClick={handleShowPasswordClick}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#343A40]"
+              >
+                {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+              </button>
+            </div>
           </div>
 
           <CustomButton
@@ -100,7 +118,7 @@ const LoginPage = () => {
           <p className="text-sm text-black">
             Não tem uma conta?{" "}
             <span
-              onClick={handleRegisterClick}
+              onClick={handleOpenRegisterClick}
               className="cursor-pointer font-semibold hover:underline"
             >
               Cadastre-se
