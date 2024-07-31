@@ -6,8 +6,14 @@ import CustomInput from "../components/customInput/custom-input";
 import { useForm } from "react-hook-form";
 import InputErrorMessage from "../components/input-error-message";
 import validator from "validator";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useState } from "react";
 
 const RegisterPage = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
+
   const {
     register,
     handleSubmit,
@@ -17,6 +23,14 @@ const RegisterPage = () => {
 
   const handleRegisterClick = (data: any) => {
     console.log(data);
+  };
+
+  const handleShowPasswordClick = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleShowConfirmPasswordClick = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   return (
@@ -104,24 +118,35 @@ const RegisterPage = () => {
         <div className="flex w-full flex-col gap-1">
           <label className="font-semibold text-[#343A40]">Senha</label>
 
-          <CustomInput
-            className="text-base"
-            placeholder="Digite seu senha"
-            {...register("password", {
-              required: true,
-              minLength: 8,
-              validate: (value) => {
-                return validator.isStrongPassword(value, {
-                  minLength: 8,
-                  minLowercase: 1,
-                  minUppercase: 1,
-                  minNumbers: 1,
-                  minSymbols: 1,
-                });
-              },
-            })}
-            has_error={!!errors?.password || false}
-          />
+          <div className="relative">
+            <CustomInput
+              type={showPassword ? "text" : "password"}
+              className="text-base"
+              placeholder="Digite seu senha"
+              {...register("password", {
+                required: true,
+                minLength: 8,
+                validate: (value) => {
+                  return validator.isStrongPassword(value, {
+                    minLength: 8,
+                    minLowercase: 1,
+                    minUppercase: 1,
+                    minNumbers: 1,
+                    minSymbols: 1,
+                  });
+                },
+              })}
+              has_error={!!errors?.password || false}
+            />
+
+            <button
+              type="button"
+              onClick={handleShowPasswordClick}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#343A40]"
+            >
+              {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+            </button>
+          </div>
 
           {errors?.password?.type === "required" && (
             <InputErrorMessage>Senha é obrigatório</InputErrorMessage>
@@ -146,16 +171,31 @@ const RegisterPage = () => {
             Confirmação de senha
           </label>
 
-          <CustomInput
-            className="text-base"
-            placeholder="Digite seu senha"
-            {...register("passwordConfirmation", {
-              required: true,
-              validate: (value) => {
-                return value === getValues("password");
-              },
-            })}
-          />
+          <div className="relative">
+            <CustomInput
+              type={showConfirmPassword ? "text" : "password"}
+              className="text-base"
+              placeholder="Digite seu senha"
+              {...register("passwordConfirmation", {
+                required: true,
+                validate: (value) => {
+                  return value === getValues("password");
+                },
+              })}
+            />
+
+            <button
+              type="button"
+              onClick={handleShowConfirmPasswordClick}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#343A40]"
+            >
+              {showConfirmPassword ? (
+                <FaEyeSlash size={18} />
+              ) : (
+                <FaEye size={18} />
+              )}
+            </button>
+          </div>
 
           {errors?.passwordConfirmation?.type === "required" && (
             <InputErrorMessage>
