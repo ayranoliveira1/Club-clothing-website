@@ -35,7 +35,10 @@ const LoginPage = () => {
 
   return (
     <main className="flex h-[100%] items-center justify-center">
-      <div className="flex w-[450px] flex-col items-center gap-5">
+      <form
+        onSubmit={handleSubmit(handleLoginClick)}
+        className="flex w-[450px] flex-col items-center gap-5"
+      >
         <h2 className="text-xl font-bold text-black">Entre com sua conta</h2>
 
         <CustomButton startIcon={<FaGoogle size={18} />}>
@@ -107,12 +110,7 @@ const LoginPage = () => {
           </div>
         </div>
 
-        <CustomButton
-          onClick={() => handleSubmit(handleLoginClick)()}
-          startIcon={<FiLogIn size={18} />}
-        >
-          Entrar
-        </CustomButton>
+        <CustomButton startIcon={<FiLogIn size={18} />}>Entrar</CustomButton>
 
         <p className="text-sm text-black">
           Não tem uma conta?{" "}
@@ -123,7 +121,7 @@ const LoginPage = () => {
             Cadastre-se
           </span>
         </p>
-      </div>
+      </form>
     </main>
   );
 };
