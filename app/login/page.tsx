@@ -6,7 +6,7 @@ import { FiLogIn } from "react-icons/fi";
 import CustomInput from "../components/customInput/custom-input";
 
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import InputErrorMessage from "../components/input-error-message";
 import validator from "validator";
 import { useState } from "react";
@@ -21,7 +21,7 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-  const handleLoginClick = (data: any) => {
+  const handleLoginClick = (data: FieldValues) => {
     console.log(data);
   };
 

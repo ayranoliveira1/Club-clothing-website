@@ -3,7 +3,7 @@
 import { FiLogIn } from "react-icons/fi";
 import CustomButton from "../components/custom-button";
 import CustomInput from "../components/customInput/custom-input";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import InputErrorMessage from "../components/input-error-message";
 import validator from "validator";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -21,7 +21,7 @@ const RegisterPage = () => {
     getValues,
   } = useForm();
 
-  const handleRegisterClick = (data: any) => {
+  const handleRegisterClick = (data: FieldValues) => {
     console.log(data);
   };
 
