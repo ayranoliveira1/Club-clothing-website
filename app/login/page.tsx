@@ -10,6 +10,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import InputErrorMessage from "../components/input-error-message";
 import validator from "validator";
 import { useState } from "react";
+import LoginForm from "../types/login-form";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -19,7 +20,7 @@ const LoginPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<LoginForm>();
 
   const handleLoginClick = (data: FieldValues) => {
     console.log(data);
