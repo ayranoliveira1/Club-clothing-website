@@ -8,6 +8,7 @@ import InputErrorMessage from "../components/input-error-message";
 import validator from "validator";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
+import SingUpForm from "../types/sing-up-form";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -19,7 +20,7 @@ const RegisterPage = () => {
     handleSubmit,
     formState: { errors },
     getValues,
-  } = useForm();
+  } = useForm<SingUpForm>();
 
   const handleRegisterClick = (data: FieldValues) => {
     console.log(data);
